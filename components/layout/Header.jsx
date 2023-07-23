@@ -19,7 +19,7 @@ export const Header = () => {
         <ul className="mt-4 hidden flex-col gap-2 text-center font-heading text-xs tracking-wider md:flex">
           {navLinks.map(({ name, link }, i) => (
             <Link key={i} href={link}>
-              <li>{name}</li>
+              <li className="transition-all hover:text-primary">{name}</li>
             </Link>
           ))}
         </ul>
@@ -27,7 +27,7 @@ export const Header = () => {
 
       {/* Desktop CTAs */}
       <div className="hidden h-max gap-2 md:flex">
-        <button className="group flex w-52 items-center rounded-b-3xl rounded-tl-none rounded-tr-none border border-primary py-1 pl-1 pr-5 text-sm font-semibold uppercase text-primary transition-all hover:border-primary hover:bg-primary hover:text-black ">
+        <button className="group flex w-52 items-center rounded-b-[18px] border border-primary py-1 pl-1 pr-5 text-sm font-semibold uppercase text-primary transition-all hover:border-primary hover:bg-primary hover:text-black ">
           <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary transition-all group-hover:bg-white ">
             <Image
               src="/icons/right-polygon.svg"
