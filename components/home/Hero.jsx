@@ -4,8 +4,7 @@ import Image from "next/image";
 import { useState, useCallback, useEffect, Suspense } from "react";
 import { FactionsSidebar } from "./FactionsSidebar";
 
-import { useLoader, useThree, useFrame } from '@react-three/fiber';
-import { TextureLoader } from 'three';
+import { useThree, useFrame } from '@react-three/fiber';
 import { Canvas } from '@react-three/fiber';
 import { Plane, useTexture } from '@react-three/drei';
 
