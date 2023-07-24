@@ -1,10 +1,30 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useCallback, useEffect, Suspense } from "react";
 import { FactionsSidebar } from "./FactionsSidebar";
 
+import { useLoader, useThree, useFrame } from '@react-three/fiber';
+import { TextureLoader } from 'three';
+import { Canvas } from '@react-three/fiber';
+import { Plane, useTexture } from '@react-three/drei';
+
 export const Hero = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = useCallback((e) => {
+    // normalize mouse coordinates from -0.5 to 0.5
+    const x = (e.clientX / window.innerWidth) - 0.5;
+    const y = (e.clientY / window.innerHeight) - 0.5;
+
+    setMousePosition({ x, y });
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [handleMouseMove]);
+
   return (
     <div className="flex h-screen w-full flex-col items-center justify-stretch md:flex-row md:overflow-hidden md:px-10">
       {/* Left section */}
@@ -51,13 +71,20 @@ export const Hero = () => {
 
       {/* Mid section */}
       <div className="flex flex-1 flex-col items-center md:h-screen">
-        <Image
+        <Canvas className="hidden w-full xl:block xl:max-w-[1070px] 2xl:max-w-[70vw]">
+          <Suspense fallback={null}>
+            <ImagePlane imagePath="/home/Magetti.webp" position={[-1, 0, -1]} scale={5} mousePosition={mousePosition} />
+            <ImagePlane imagePath="/home/Teneika.webp" position={[-1, 0,-3]} scale={5} mousePosition={mousePosition} />
+            // add more ImagePlane components for additional images
+          </Suspense>
+        </Canvas>
+        {/* <Image
           src="/home/home-banner-desktop.png"
           alt="Hero banner"
           width={700}
           height={700}
           className="hidden w-full xl:block xl:max-w-[1070px] 2xl:max-w-[70vw]"
-        />
+        /> */}
         <Image
           src="/home/home-banner-mobile.png"
           alt="Hero banner"
@@ -81,5 +108,47 @@ export const Hero = () => {
         <FactionsSidebar />
       </div>
     </div>
+  );
+};
+
+const ImagePlane = ({ imagePath, position, scale = 2, mousePosition }) => {
+  const { camera } = useThree();
+
+  useFrame(() => {
+    // how much the camera moves with mouse. You can adjust this value for stronger/weaker effect
+    const factor = 0.2;
+  
+    // lerp function for smooth animation
+    const lerp = (v0, v1, t) => v0 * (1 - t) + v1 * t;
+    
+    // target camera position
+    const targetX = mousePosition.x * factor;
+    const targetY = mousePosition.y * factor;
+  
+    // move camera towards target position
+    camera.position.x = lerp(camera.position.x, targetX, 0.1);
+    camera.position.y = lerp(camera.position.y, targetY, 0.1);
+  
+    // calculate focus point
+    const focusPoint = {
+      x: camera.position.x + targetX,
+      y: camera.position.y + targetY,
+      z: 0,
+    }
+  
+    // update camera
+    camera.lookAt(focusPoint.x, focusPoint.y, focusPoint.z);
+    camera.updateProjectionMatrix();
+  });
+
+  const texture = useTexture(imagePath);
+
+  // once the texture is loaded, calculate its aspect ratio and dimensions
+  const aspect = texture.image ? texture.image.width / texture.image.height : 1;
+
+  return (
+    <Plane args={[aspect * scale, scale]} position={position}>
+      <meshBasicMaterial attach="material" map={texture} transparent={true}/>
+    </Plane>
   );
 };
