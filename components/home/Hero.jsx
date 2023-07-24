@@ -75,7 +75,6 @@ export const Hero = () => {
             <ImagePlane imagePath="/home/Gornaugh.webp" position={[0, 0,-5]} scale={8} mousePosition={mousePosition} />
             <ImagePlane imagePath="/home/Sirex.webp" position={[0, 0,-4]} scale={7} mousePosition={mousePosition} />
             <ImagePlane imagePath="/home/bg.webp" position={[0, 0,-10]} scale={12} mousePosition={mousePosition} />
-            // add more ImagePlane components for additional images
           </Suspense>
         </Canvas>
         {/* <Image
@@ -115,35 +114,25 @@ const ImagePlane = ({ imagePath, position, scale = 2, mousePosition }) => {
   const { camera } = useThree();
 
   useFrame(() => {
-    // how much the camera moves with mouse. You can adjust this value for stronger/weaker effect
     const factor = 0.2;
-  
-    // lerp function for smooth animation
-    const lerp = (v0, v1, t) => v0 * (1 - t) + v1 * t;
-    
-    // target camera position
+    const lerp = (v0, v1, t) => v0 * (1 - t) + v1 * t;  
     const targetX = mousePosition.x * factor;
     const targetY = mousePosition.y * factor;
-  
-    // move camera towards target position
+
     camera.position.x = lerp(camera.position.x, targetX, 0.1);
     camera.position.y = lerp(camera.position.y, targetY, 0.1);
   
-    // calculate focus point
     const focusPoint = {
       x: camera.position.x + targetX,
       y: camera.position.y + targetY,
       z: 0,
     }
   
-    // update camera
     camera.lookAt(focusPoint.x, focusPoint.y, focusPoint.z);
     camera.updateProjectionMatrix();
   });
 
   const texture = useTexture(imagePath);
-
-  // once the texture is loaded, calculate its aspect ratio and dimensions
   const aspect = texture.image ? texture.image.width / texture.image.height : 1;
 
   return (
