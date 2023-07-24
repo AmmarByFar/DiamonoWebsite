@@ -99,7 +99,7 @@ export const Hero = () => {
           alt="Hero banner"
           width={200}
           height={200}
-          className="-mt-[18vw] w-[60vw] md:-mt-24 md:w-[300px] lg:-mt-36 xl:-mt-[14vw] xl:w-[390px]"
+          className="-mt-[18vw] w-[60vw] drop-shadow-2xl md:-mt-24 md:w-[300px] lg:-mt-36 xl:-mt-[14vw] xl:w-[390px]"
         />
       </div>
 
