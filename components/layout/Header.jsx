@@ -13,7 +13,13 @@ export const Header = () => {
     <header className="fixed top-0 z-50 flex w-full justify-between p-6 md:p-10">
       <nav className="cc">
         <Link href={"/"}>
-          <Image src="/logo.svg" alt="Studio Logo" width={88} height={20} />
+          <Image
+            src="/logo.svg"
+            alt="Studio Logo"
+            width={88}
+            height={20}
+            className="drop-shadow-lg"
+          />
         </Link>
 
         <ul className="mt-4 hidden flex-col gap-2 text-center font-heading text-xs tracking-wider md:flex">
@@ -52,7 +58,7 @@ export const Header = () => {
           alt="hamburger menu"
           width={26}
           height={26}
-          className="fill-white text-white"
+          className="fill-white text-white drop-shadow-lg"
         />
       </button>
 
@@ -80,7 +86,7 @@ export const Header = () => {
           {/* nav links */}
           <ul className="flex flex-col gap-6 font-heading text-4xl text-black">
             {navLinks.map(({ name, link }, i) => (
-              <Link key={i} href={link} className="">
+              <Link key={i} href={link} onClick={() => setMenuEnabled(false)}>
                 <li>{name}</li>
               </Link>
             ))}

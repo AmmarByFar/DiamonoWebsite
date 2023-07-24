@@ -24,27 +24,27 @@ export const navLinks = [
 export const sidebarFactions = [
   {
     name: "Taneika",
-    link: "/",
+    link: "/taneika",
     avatar: "/home/taneika.png",
-    emblem: "/home/taneika-emblem.png",
+    emblem: "/emblems/taneika-emblem.png",
   },
   {
     name: "Arcshots",
-    link: "/",
+    link: "/taneika",
     avatar: "/home/arcshots.png",
-    emblem: "/home/arcshots-emblem.png",
+    emblem: "/emblems/arcshots-emblem.png",
   },
   {
     name: "Magetti",
-    link: "/",
+    link: "/magetti",
     avatar: "/home/magetti.png",
-    emblem: "/home/magetti-emblem.png",
+    emblem: "/emblems/magetti-emblem.png",
   },
   {
     name: "Gornaught",
-    link: "/",
+    link: "/magetti",
     avatar: "/home/gornaught.png",
-    emblem: "/home/gornaught-emblem.png",
+    emblem: "/emblems/gornaught-emblem.png",
   },
 ];
 
