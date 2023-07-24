@@ -10,13 +10,11 @@ import { Canvas } from '@react-three/fiber';
 import { Plane, useTexture } from '@react-three/drei';
 
 export const Hero = () => {
+  // Hook into mouse movement to move THREE.js camera
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
   const handleMouseMove = useCallback((e) => {
-    // normalize mouse coordinates from -0.5 to 0.5
     const x = (e.clientX / window.innerWidth) - 0.5;
     const y = (e.clientY / window.innerHeight) - 0.5;
-
     setMousePosition({ x, y });
   }, []);
 
@@ -73,8 +71,11 @@ export const Hero = () => {
       <div className="flex flex-1 flex-col items-center md:h-screen">
         <Canvas className="hidden w-full xl:block xl:max-w-[1070px] 2xl:max-w-[70vw]">
           <Suspense fallback={null}>
-            <ImagePlane imagePath="/home/Magetti.webp" position={[-1, 0, -1]} scale={5} mousePosition={mousePosition} />
-            <ImagePlane imagePath="/home/Teneika.webp" position={[-1, 0,-3]} scale={5} mousePosition={mousePosition} />
+            <ImagePlane imagePath="/home/Magetti.webp" position={[0, 0, 0]} scale={5} mousePosition={mousePosition} />
+            <ImagePlane imagePath="/home/Teneika.webp" position={[0, 0,-2]} scale={6} mousePosition={mousePosition} />
+            <ImagePlane imagePath="/home/Gornaugh.webp" position={[0, 0,-5]} scale={8} mousePosition={mousePosition} />
+            <ImagePlane imagePath="/home/Sirex.webp" position={[0, 0,-4]} scale={7} mousePosition={mousePosition} />
+            <ImagePlane imagePath="/home/bg.webp" position={[0, 0,-10]} scale={12} mousePosition={mousePosition} />
             // add more ImagePlane components for additional images
           </Suspense>
         </Canvas>
