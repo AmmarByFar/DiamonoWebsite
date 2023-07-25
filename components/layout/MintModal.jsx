@@ -8,15 +8,20 @@ import { Progress } from "@/components/ui/progress";
 
 export const MintModal = () => {
   const [mintAmount, setMintAmount] = useState(2);
+  // mintAmount is selected Mint amount from slide & 2 is the default which you can change
   const [gasFee, setGasFee] = useState(135);
+  // gasFee is selected gas fee from the slide & 135 is default
 
+  // percentage of minted progress at the bottom for progress bar
   const progress = 35;
   const progressed = 2690;
   const progressTotalNum = 5000;
 
+  // Event handlers for the Mint with * buttons
   const unisatHandler = () => {};
   const xverseHandler = () => {};
 
+  // Example of data in console
   useEffect(() => {
     console.log(mintAmount);
 
@@ -86,7 +91,7 @@ export const MintModal = () => {
             min={1}
             max={4}
             step={1}
-            onValueCommit={(value) => setMintAmount(value)}
+            onValueCommit={(value) => setMintAmount(value[0])}
             className="w-32 md:w-48"
           />
           <p className="ml-4 w-20 text-right md:w-fit">{mintAmount}</p>
@@ -101,7 +106,7 @@ export const MintModal = () => {
             min={25}
             max={250}
             step={1}
-            onValueCommit={(value) => setGasFee(value)}
+            onValueCommit={(value) => setGasFee(value[0])}
             className="w-32 md:w-48"
           />
           <p className="ml-4 w-20 text-right md:w-fit">{gasFee} sats</p>
