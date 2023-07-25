@@ -70,11 +70,11 @@ export const Hero = () => {
       <div className="flex flex-1 flex-col items-center md:h-screen">
         <Canvas className="hidden w-full xl:block xl:max-w-[1070px] 2xl:max-w-[70vw]">
           <Suspense fallback={null}>
-            <ImagePlane imagePath="/home/Magetti.webp" position={[0, 0, 0]} scale={5} mousePosition={mousePosition} />
-            <ImagePlane imagePath="/home/Teneika.webp" position={[0, 0,-2]} scale={6} mousePosition={mousePosition} />
-            <ImagePlane imagePath="/home/Gornaugh.webp" position={[0, 0,-5]} scale={8} mousePosition={mousePosition} />
-            <ImagePlane imagePath="/home/Sirex.webp" position={[0, 0,-4]} scale={7} mousePosition={mousePosition} />
-            <ImagePlane imagePath="/home/bg.webp" position={[0, 0,-10]} scale={12} mousePosition={mousePosition} />
+            <ImagePlane imagePath="/home/Magetti.webp" position={[0, 0.5, 0]} scale={6} mousePosition={mousePosition} />
+            <ImagePlane imagePath="/home/Teneika.webp" position={[0, 1,-2]} scale={7.5} mousePosition={mousePosition} />
+            <ImagePlane imagePath="/home/Gornaugh.webp" position={[0, 1.5,-5]} scale={11} mousePosition={mousePosition} />
+            <ImagePlane imagePath="/home/Sirex.webp" position={[0, 1.5,-4]} scale={10} mousePosition={mousePosition} />
+            <ImagePlane imagePath="/home/bg.webp" position={[0, 3.3,-10]} scale={17} mousePosition={mousePosition} />
           </Suspense>
         </Canvas>
         {/* <Image
