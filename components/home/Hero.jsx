@@ -72,7 +72,7 @@ export const Hero = () => {
       <div className="flex flex-1 flex-col items-center md:h-screen">
         <Canvas className="hidden w-full xl:block xl:max-w-[1070px] 2xl:max-w-[70vw]">
           <Suspense fallback={null}>
-            <ImagePlane imagePath="/home/Magetti.webp" position={[0, 0.5, 1]} scale={4.9} mousePosition={mousePosition} />
+            <ImagePlane imagePath="/home/Magetti.webp" position={[-0.1, 0.5, 1]} scale={5.2} mousePosition={mousePosition} />
             <ImagePlane imagePath="/home/Magetti_Diamono.webp" position={[0, 0.7, -1]} scale={8} mousePosition={mousePosition} />
             <ImagePlane imagePath="/home/Teneika.webp" position={[0, 1,-1.5]} scale={7.5} mousePosition={mousePosition} />
             <ImagePlane imagePath="/home/Teneika_Diamono.webp" position={[0, 1,-0.5]} scale={6.5} mousePosition={mousePosition} />
@@ -84,12 +84,10 @@ export const Hero = () => {
           </Suspense>
         </Canvas>
 
-        <Canvas
-        width={1000}
-        height={1000} 
-        className="md:w-[480px] lg:w-[510px] xl:hidden">
+        {/* <Canvas 
+        className="md:w-[480px] lg:w-[510px] xl:hidden" style={{ width: '100vw', height: '100%' }}>
           <Suspense fallback={null}>
-            <ImagePlane imagePath="/home/Magetti.webp" position={[0.2, -0.5, 1]} scale={4.9} mousePosition={mousePosition} />
+            <ImagePlane imagePath="/home/Magetti.webp" position={[0.1, -0.5, 1]} scale={5.2} mousePosition={mousePosition} />
             <ImagePlane imagePath="/home/Magetti_Diamono.webp" position={[0.5, 0, -1]} scale={8} mousePosition={mousePosition} />
             <ImagePlane imagePath="/home/Teneika.webp" position={[-0.1, -0.3,-1.5]} scale={7.5} mousePosition={mousePosition} />
             <ImagePlane imagePath="/home/Teneika_Diamono.webp" position={[0.2, -0.5,-0.5]} scale={6.5} mousePosition={mousePosition} />
@@ -97,9 +95,9 @@ export const Hero = () => {
             <ImagePlane imagePath="/home/Gornaught_Diamono.webp" position={[0.5, 0,-2.5]} scale={9} mousePosition={mousePosition} />
             <ImagePlane imagePath="/home/Sirex.webp" position={[0, -0.5,-4]} scale={10} mousePosition={mousePosition} />
             <ImagePlane imagePath="/home/Sirex_Diamono.webp" position={[0, 0,-2]} scale={8} mousePosition={mousePosition} />
-            <ImagePlane imagePath="/home/bg.webp" position={[0, -1,-10]} scale={18} mousePosition={mousePosition} />
+            <ImagePlane imagePath="/home/bg.webp" position={[0, -1,-10]} scale={20} mousePosition={mousePosition} />
           </Suspense>
-        </Canvas>
+        </Canvas> */}
 
         {/* <Image
           src="/home/home-banner-desktop.png"
@@ -107,14 +105,14 @@ export const Hero = () => {
           width={700}
           height={700}
           className="hidden w-full xl:block xl:max-w-[1070px] 2xl:max-w-[70vw]"
-        />
+        /> */}
         <Image
           src="/home/home-banner-mobile.png"
           alt="Hero banner"
           width={1000}
           height={1000}
           className="md:w-[480px] lg:w-[510px] xl:hidden"
-        /> */}
+        />
 
         {/* Daimono logo */}
         <Image
@@ -140,6 +138,11 @@ const ImagePlane = ({ imagePath, position, scale = 2, mousePosition }) => {
   const targetCameraPosition = useRef(new THREE.Vector3(0, 0, 5.5));
   const cameraSpeed = useRef(0.005);
 
+  const clock = new THREE.Clock();
+  let cameraStartPosition = new THREE.Vector3(0, 0, 5.5);
+  let cameraEndPosition = new THREE.Vector3(0, 0, 6);
+  let animationDuration = 8;
+
   const distance = (v1, v2) => {
     var dx = v1.x - v2.x;
     var dy = v1.y - v2.y;
@@ -161,23 +164,47 @@ const ImagePlane = ({ imagePath, position, scale = 2, mousePosition }) => {
         setInitialAnimationDone(true);
       }
     }
-    const factor = 0.3;
-    const lerp = (v0, v1, t) => v0 * (1 - t) + v1 * t;  
-    const targetX = mousePosition.x * factor;
-    const targetY = mousePosition.y * factor;
-
-    camera.position.x = lerp(camera.position.x, targetX, 0.1);
-    camera.position.y = lerp(camera.position.y, targetY, 0.1);
   
+    // Calculate target position based on mouse input
+    const mouseFactor = 0.1;
+    const lerp = (v0, v1, t) => v0 * (1 - t) + v1 * t;
+    const targetX = mousePosition.x * mouseFactor;
+    const targetY = mousePosition.y * mouseFactor;
     const focusPoint = {
       x: camera.position.x + targetX,
       y: camera.position.y + targetY,
       z: 0,
     }
   
+    // Calculate next position for the zoom effect
+    let elapsedTime = clock.getElapsedTime();
+    // Reset the clock and positions when the animation ends
+    if (elapsedTime >= animationDuration) {
+      clock.start();
+      let temp = cameraStartPosition;
+      cameraStartPosition = cameraEndPosition;
+      cameraEndPosition = temp;
+      elapsedTime = 0;
+    }
+  
+    // Calculate the next position using a sine easing function
+    let t = Math.sin((elapsedTime / animationDuration) * Math.PI / 2); // sine easing function
+    let zoomPosition = new THREE.Vector3();
+    zoomPosition.lerpVectors(cameraStartPosition, cameraEndPosition, t);
+  
+    // Combine mouse and zoom effects
+    targetCameraPosition.current.x = lerp(zoomPosition.x, targetX, 0.1);
+    targetCameraPosition.current.y = lerp(zoomPosition.y, targetY, 0.1);
+    targetCameraPosition.current.z = zoomPosition.z;
+  
+    // Move the camera towards the target position
+    camera.position.lerp(targetCameraPosition.current, cameraSpeed.current);
+    
+    // Adjust the camera's focus
     camera.lookAt(focusPoint.x, focusPoint.y, focusPoint.z);
     camera.updateProjectionMatrix();
   });
+  
 
   const texture = useTexture(imagePath);
   const aspect = texture.image ? texture.image.width / texture.image.height : 1;
