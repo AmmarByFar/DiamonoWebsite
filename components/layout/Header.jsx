@@ -45,18 +45,21 @@ export const Header = () => {
 
         {/* Desktop CTAs */}
         <div className="hidden h-max gap-2 md:flex">
-          <button className="group flex w-52 items-center rounded-b-[18px] border border-primary py-1 pl-1 pr-5 text-sm font-semibold uppercase text-primary transition-all hover:border-primary hover:bg-primary hover:text-black ">
-            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary transition-all group-hover:bg-white ">
-              <Image
-                src="/icons/right-polygon.svg"
-                alt="right-polygon"
-                width={9}
-                height={9}
-                className=""
-              />
-            </span>
-            <span className="ml-auto mt-0.5">Play game trailer</span>
-          </button>
+          <Link href="/trailer">
+            <button className="group flex w-52 items-center rounded-b-[18px] border border-primary py-1 pl-1 pr-5 text-sm font-semibold uppercase text-primary transition-all hover:border-primary hover:bg-primary hover:text-black ">
+              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary transition-all group-hover:bg-white ">
+                <Image
+                  src="/icons/right-polygon.svg"
+                  alt="right-polygon"
+                  width={9}
+                  height={9}
+                  className=""
+                />
+              </span>
+              <span className="ml-auto mt-0.5">Play game trailer</span>
+            </button>
+          </Link>
+
           <DialogTrigger className="w-40 rounded-full rounded-br-none bg-primary p-2 text-sm font-semibold uppercase text-black transition-all hover:bg-primaryDark">
             Mint
           </DialogTrigger>
@@ -104,18 +107,20 @@ export const Header = () => {
             </ul>
 
             <div className="my-10 ">
-              <button className="group flex w-48 items-center rounded-b-2xl border border-darkBg py-1 pl-1 pr-6 font-semibold uppercase text-darkBg transition-all hover:border-darkBg hover:bg-darkBg hover:text-primary ">
-                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-darkBg transition-all group-hover:bg-primary ">
-                  <Image
-                    src="/icons/white-polygon.svg"
-                    alt="right-polygon"
-                    width={9}
-                    height={9}
-                    className=""
-                  />
-                </span>
-                <span className="ml-auto mt-0.5">Game trailer</span>
-              </button>
+              <Link href="/trailer">
+                <button className="group flex w-48 items-center rounded-b-2xl border border-darkBg py-1 pl-1 pr-6 font-semibold uppercase text-darkBg transition-all hover:border-darkBg hover:bg-darkBg hover:text-primary ">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-darkBg transition-all group-hover:bg-primary ">
+                    <Image
+                      src="/icons/white-polygon.svg"
+                      alt="right-polygon"
+                      width={9}
+                      height={9}
+                      className=""
+                    />
+                  </span>
+                  <span className="ml-auto mt-0.5">Game trailer</span>
+                </button>
+              </Link>
 
               <DialogTrigger className="mt-3 w-48 rounded-full rounded-br-none bg-darkBg p-2 text-base uppercase text-primary transition-all hover:bg-secondary">
                 Mint
