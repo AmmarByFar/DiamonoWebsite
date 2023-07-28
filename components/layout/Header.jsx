@@ -2,14 +2,7 @@
 
 import { useState } from "react";
 
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -108,7 +101,10 @@ export const Header = () => {
 
             <div className="my-10 ">
               <Link href="/trailer">
-                <button className="group flex w-48 items-center rounded-b-2xl border border-darkBg py-1 pl-1 pr-6 font-semibold uppercase text-darkBg transition-all hover:border-darkBg hover:bg-darkBg hover:text-primary ">
+                <button
+                  onClick={() => setMenuEnabled(false)}
+                  className="group flex w-48 items-center rounded-b-2xl border border-darkBg py-1 pl-1 pr-6 font-semibold uppercase text-darkBg transition-all hover:border-darkBg hover:bg-darkBg hover:text-primary "
+                >
                   <span className="flex h-7 w-7 items-center justify-center rounded-full bg-darkBg transition-all group-hover:bg-primary ">
                     <Image
                       src="/icons/white-polygon.svg"

@@ -10,6 +10,7 @@ export default function Trailer() {
   const [video, setVideo] = useState();
 
   const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
   const [videoProgress, setVideoProgress] = useState();
   const [volume, setVolume] = useState(1.0);
 
@@ -49,24 +50,29 @@ export default function Trailer() {
   }, []);
 
   return (
-    <div className="relative h-screen overflow-hidden">
-      <div className="h-[100vh] w-[125vw]">
+    <div className="relative h-screen overflow-hidden bg-black">
+      <div className="peer h-full w-full">
         <video
           ref={videoRef}
           onClick={togglePlay}
           onTimeUpdate={timeUpdate}
+          onDurationChange={() => setDuration(video.duration)}
           src="/short_cinematic_1080p.mp4"
-          className="h-full w-full object-cover object-center"
+          className="h-full w-full object-center lg:object-cover"
         ></video>
       </div>
 
       {video && (
-        <div className="absolute bottom-8 w-full px-4 sm:px-14">
+        <div
+          className={`absolute bottom-5 w-full animate-fade-up px-4 animate-duration-200 hover:block peer-hover:block sm:px-14 ${
+            video.paused ? "block" : "hidden"
+          }`}
+        >
           {/* timeline */}
           <div
             ref={timeline}
             onClick={scrubVideo}
-            className="flex h-1.5 w-full cursor-pointer items-center border-none bg-primary/30"
+            className="mb-3 flex h-1.5 w-full cursor-pointer items-center border-none bg-primary/30"
           >
             <div
               style={{ width: `${videoProgress}%` }}
@@ -77,7 +83,7 @@ export default function Trailer() {
           </div>
 
           {/* Controls */}
-          <div className="mt-1 flex h-10 items-center gap-4 px-2 sm:px-6">
+          <div className="mt-1 flex h-7 items-center gap-4 px-2 sm:px-6">
             <button onClick={togglePlay}>
               <Image
                 src={
@@ -121,10 +127,7 @@ export default function Trailer() {
               </span>{" "}
               /{" "}
               <span>
-                {video &&
-                  new Date(video?.duration * 1000)
-                    .toISOString()
-                    .substring(14, 19)}
+                {new Date(duration * 1000).toISOString().substring(14, 19)}
               </span>
             </p>
           </div>
