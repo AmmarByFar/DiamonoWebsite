@@ -25,10 +25,10 @@ module.exports = {
         purpleAccent: "#4E4182",
         blueAccent: "#75DEFE",
         redAccent: "#E36852",
-        arcshotsColor: "#2F798C",
-        gornaughtColor: "#DCC581",
-        magettiColor: "#5F51B9",
         taneikaColor: "#A63F3F",
+        arcshotsColor: "#2F798C",
+        magettiColor: "#5F51B9",
+        gornaughtColor: "#DCC581",
       },
 
       fontFamily: {
