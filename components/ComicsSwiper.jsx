@@ -34,6 +34,10 @@ export const ComicsSwiper = () => {
             slidesPerView: 4.8,
             spaceBetween: 45,
           },
+          2000: {
+            slidesPerView: 5.4,
+            spaceBetween: 45,
+          },
         }}
         onBeforeInit={(swiper) => {
           swiperRef.current = swiper;
@@ -97,7 +101,7 @@ const ComicSlide = ({ comic }) => {
             alt=""
             width={400}
             height={500}
-            className="h-[78vw] w-full object-cover object-top sm:h-72 lg:h-64"
+            className="h-[78vw] w-full object-cover object-top sm:h-72 lg:h-64 2xl:h-80"
           />
         </Link>
 
