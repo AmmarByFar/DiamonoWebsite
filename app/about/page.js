@@ -32,21 +32,21 @@ export default function About() {
   return (
     <div className="flex flex-col bg-[url(/bg2.png)] bg-cover bg-center lg:h-screen lg:flex-row lg:px-10">
       {/* Left content */}
-      <div className="flex h-full w-full items-center justify-center gap-10 px-5 pt-32 md:px-10 md:pt-64 lg:w-[50%] lg:px-0 lg:pl-10 lg:pt-20 xl:w-[46%] xl:gap-24">
+      <div className="flex h-full w-full items-center justify-center gap-10 px-5 pt-32 md:px-10 md:pt-64 lg:w-[50%] lg:px-0 lg:pl-10 lg:pt-20 xl:w-[46%] xl:gap-24 2xl:w-[36%]">
         <div className="hidden h-1/2 flex-col gap-2 lg:flex">
           <div
-            className={`h-1/3 w-[3px] bg-primary/30 ${
-              contentScroll <= 33.33 && "bg-primary/100"
+            className={`h-1/3 w-[3px] bg-primary bg-opacity-30 ${
+              contentScroll <= 33.33 && "bg-opacity-100"
             }`}
           />
           <div
-            className={`h-1/3 w-[3px] bg-primary/30 ${
-              contentScroll > 33.33 && contentScroll < 66.66 && "bg-primary/100"
+            className={`h-1/3 w-[3px] bg-primary bg-opacity-30 ${
+              contentScroll > 33.33 && contentScroll < 66.66 && "bg-opacity-100"
             }`}
           />
           <div
-            className={`h-1/3 w-[3px] bg-primary/30 ${
-              contentScroll >= 66.66 && "bg-primary/100"
+            className={`h-1/3 w-[3px] bg-primary bg-opacity-30 ${
+              contentScroll >= 66.66 && "bg-opacity-100"
             }`}
           />
         </div>
@@ -137,13 +137,13 @@ export default function About() {
         </div>
       </div>
 
-      <div className="flex items-end justify-end lg:h-full lg:w-[50%] lg:flex-col xl:w-[54%]">
+      <div className="flex items-end justify-end lg:h-full lg:w-[50%] lg:flex-col xl:w-[54%] 2xl:w-[64%]">
         <Image
           src="/about.png"
           alt="about"
-          width={740}
-          height={740}
-          className="hidden lg:block"
+          width={800}
+          height={800}
+          className="hidden lg:block 2xl:h-auto 2xl:w-[900px] 2xl:object-cover"
         />
         <Image
           src="/about-mobile.png"
