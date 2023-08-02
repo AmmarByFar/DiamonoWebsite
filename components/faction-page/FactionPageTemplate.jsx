@@ -21,7 +21,7 @@ export const FactionPageTemplate = ({ content }) => {
         style={{
           backgroundImage: `url('${banner}')`,
         }}
-        className={`relative h-[58vh] flex-1 bg-cover bg-center sm:h-screen`}
+        className={`relative h-[58vh] flex-1 bg-cover bg-[position:center_40%]  sm:h-screen`}
       >
         <Image
           src="/tl-corner.png"
@@ -67,7 +67,7 @@ export const FactionPageTemplate = ({ content }) => {
       <div className="z-10 -ml-40 -mr-20 hidden w-48 bg-gradient-to-l from-darkBg from-20% sm:block" />
 
       {/* Right section */}
-      <div className="z-10 flex flex-col items-center justify-center px-10 pb-14 text-center sm:w-[380px] sm:pb-0 sm:pt-20">
+      <div className="z-10 flex flex-col items-center justify-center px-10 pb-14 text-center sm:w-[380px] sm:pb-0 sm:pt-20 2xl:w-[24vw]">
         <Image src={wordmark} alt={name + "wordmark"} width={100} height={20} />
 
         <div className="relative flex flex-col items-center justify-center">

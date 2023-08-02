@@ -4,12 +4,12 @@ import Image from "next/image";
 export default function Comics() {
   return (
     <div className="min-h-screen bg-[url(/bg2.png)] bg-cover bg-center">
-      <div className="mx-auto max-w-4xl pb-5 lg:px-4">
+      <div className="mx-auto max-w-4xl pb-5 lg:px-4 2xl:max-w-5xl">
         <Image
           src="/comics/comics-banner-desktop.png"
           alt=""
-          width={800}
-          height={400}
+          width={1000}
+          height={1000}
           className="hidden w-full sm:block"
         />
         <Image
