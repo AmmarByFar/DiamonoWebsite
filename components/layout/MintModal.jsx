@@ -37,9 +37,7 @@ export const MintModal = () => {
             Ubinix / Daimono - Shadow Spirits
           </p>
 
-          <h2 className="text-3xl tracking-wider md:mt-4 md:text-4xl">
-            Ordinal Mint
-          </h2>
+          <h2 className="text-3xl tracking-wider md:mt-4 md:text-4xl">Mint</h2>
         </div>
 
         <div className="mt-2 flex flex-1 flex-col  text-[10px] leading-[13px] text-gray-300 md:-mt-2 md:pr-8">
@@ -73,7 +71,7 @@ export const MintModal = () => {
 
         <div className="items-end gap-6 md:flex">
           <p className="text-sm font-semibold">Mint Price</p>
-          <h6 className="-mt-1 text-2xl md:-mt-0 md:text-4xl">0.005 BTC</h6>
+          <h6 className="-mt-1 text-2xl md:-mt-0 md:text-4xl">0.05 SOL</h6>
         </div>
 
         <div className="items-end gap-6 md:flex">
@@ -99,7 +97,7 @@ export const MintModal = () => {
 
         <div className="hidden h-6 w-px bg-black md:block" />
 
-        <div className="flex items-center justify-between rounded-full bg-primary  px-4 py-2 md:w-1/2 md:px-0 md:py-0">
+        {/* <div className="flex items-center justify-between rounded-full bg-primary  px-4 py-2 md:w-1/2 md:px-0 md:py-0">
           <p className="w-7/12 pr-2 md:w-fit">Ordinal GAS fee</p>
           <Slider
             defaultValue={[gasFee]}
@@ -110,7 +108,7 @@ export const MintModal = () => {
             className="w-32 md:w-48"
           />
           <p className="ml-4 w-20 text-right md:w-fit">{gasFee} sats</p>
-        </div>
+        </div> */}
       </div>
 
       {/* Mint with buttons */}
